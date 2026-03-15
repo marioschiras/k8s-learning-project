@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    app: database
+spec:
+  replicas: 1  # Databases typically run as single instance
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "notes_db"
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"  # In production, use a Secret!
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-storage
+        emptyDir: {}  # Data lost on pod restart; use PersistentVolume for production
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database  # Backend connects to this name
+spec:
+  type: ClusterIP  # Only accessible inside the cluster
+  selector:
+    app: database
+  ports:
+  - protocol: TCP
+    port: 5432       # Service port
+    targetPort: 5432 # Container port
