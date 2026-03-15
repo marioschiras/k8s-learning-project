@@ -1,0 +1,68 @@
+
+
+
+
+Pods:
+
+    - Pods managers containers    
+
+
+Virtual Network:
+
+    - Gives to each pod an IP address
+
+Service:
+
+    - Gives permanent IP address to the Pods, solves the problem of pods having a dynamic IP address
+
+    - Can be attached to each pod (lifecycle of a pod and service are not connected)
+
+    - Service at the same time Service is a load bancer
+
+
+Ingress:
+
+    Request go through ingress and ingress does the forwarding to the services
+
+
+ConfigMap:
+
+    - External configuration of application
+
+    - Pods can connect to ConfigMap and pods get the data
+
+    - When ConfigMap is adjusted the configuration changes automatically
+
+
+Secrets:
+
+    - Same thing as ConfigMap but is used to store secret data
+
+    - Stored in base64 format 
+
+    - Secrets are meant to be encrypted using 3rd party tools
+
+
+Volume:
+
+    - If Pods gets restared the data of the pod is gone
+
+    -  Volume attaches physical storage to a pod
+
+
+Deployment:
+
+    - Handles replicas of pods and scaling in application 
+
+    - Convienient way to configure pods
+
+    - In practice we work with deployments, not pods direcly
+
+
+StatefulSets:
+
+    - Handles pods but it is recommend to be used for databases
+
+    - Takes care of pods (replicas, scaling)
+
+    - Makes sure Reads/Writes databases are synchronized
