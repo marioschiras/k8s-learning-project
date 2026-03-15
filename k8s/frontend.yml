@@ -19,7 +19,6 @@ spec:
         image: k8s-learning-project-frontend
         ports:
         - containerPort: 80
-----
 
 
 apiVersion: v1
