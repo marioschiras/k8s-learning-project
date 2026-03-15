@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Frontend - nginx serving static files
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # Backend - Express.js API
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - PORT=3000
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_NAME=notes_db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # Database - PostgreSQL
+  database:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=notes_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d notes_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
