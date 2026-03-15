@@ -1,0 +1,13 @@
+
+Basic structure:
+
+  apiVersion: <api version>
+  kind: <resource type>
+
+  metadata:
+    name: <resource-name>
+    labels:
+      app: <label-name>
+
+  spec:
+    <resource specific configuration>
