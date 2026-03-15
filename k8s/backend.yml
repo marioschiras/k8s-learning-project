@@ -1,35 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: backend-deployment
   labels:
-    app: frontend
+    app: backend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: frontend
+      app: backend
   template:
     metadata:
       labels:
-        app: frontend
+        app: backend
     spec:
       containers:
-      - name: frontend
-        image: k8s-learning-project-frontend
+      - name: backend
+        image: mchiras02/notes-backend:latest
         ports:
-        - containerPort: 80
-----
+        - containerPort: 3000
 
+---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: backend-service
 spec:
   selector:
-    app.kubernetes.io/name: frontend // Reroutes the traffic to the frontend pods
+    app: backend // Reroutes the traffic to the backend pods
   ports:
     - protocol: TCP
-      port: 8080 // This is the port of the Service
-      targetPort: 80 // This is the port of the Pods
+      port: 8081 // This is the port of the Service
+      targetPort: 3000 // This is the port of the Pods

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: database
 spec:
-  replicas: 1  # Databases typically run as single instance
+  replicas: 1  # StatefulSet ensures that the database is always running
   selector:
     matchLabels:
       app: database
