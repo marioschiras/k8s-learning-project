@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: backend
   labels:
     app: backend
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: backend
@@ -19,17 +19,29 @@ spec:
         image: mchiras02/notes-backend:latest
         ports:
         - containerPort: 3000
-
+        env:
+        - name: PORT
+          value: "3000"
+        - name: DB_HOST
+          value: "database"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          value: "notes_db"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "postgres"
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: backend
 spec:
+  type: ClusterIP
   selector:
-    app: backend // Reroutes the traffic to the backend pods
+    app: backend
   ports:
-    - protocol: TCP
-      port: 8081 // This is the port of the Service
-      targetPort: 3000 // This is the port of the Pods
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
