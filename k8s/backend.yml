@@ -19,19 +19,9 @@ spec:
         image: mchiras02/notes-backend:latest
         ports:
         - containerPort: 3000
-        env:
-        - name: PORT
-          value: "3000"
-        - name: DB_HOST
-          value: "database"
-        - name: DB_PORT
-          value: "5432"
-        - name: DB_NAME
-          value: "notes_db"
-        - name: DB_USER
-          value: "postgres"
-        - name: DB_PASSWORD
-          value: "postgres"
+        envFrom:
+          - configMapRef:
+        name: backend-config
 ---
 apiVersion: v1
 kind: Service
