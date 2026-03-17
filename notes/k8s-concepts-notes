@@ -66,3 +66,14 @@ StatefulSets:
     - Takes care of pods (replicas, scaling)
 
     - Makes sure Reads/Writes databases are synchronized
+
+
+Ingress:
+
+    - Kubernetes resource that routes HTTP traffic to services inside cluster
+
+    - Ingress routes to Services not pods
+
+    - Allows to map URL to services
+
+    
