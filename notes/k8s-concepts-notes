@@ -76,4 +76,9 @@ Ingress:
 
     - Allows to map URL to services
 
-    
+
+HPA:
+
+    - Allows autoscaling in kubernetes based on the load
+
+    - Without HPA kubernetes will be always running what is defined in the deployment 
