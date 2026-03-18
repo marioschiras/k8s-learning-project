@@ -82,3 +82,7 @@ HPA:
     - Allows autoscaling in kubernetes based on the load
 
     - Without HPA kubernetes will be always running what is defined in the deployment 
+
+Namespaces:
+
+    - Way to divide the kubernetes cluster into environemnts so resources are organized

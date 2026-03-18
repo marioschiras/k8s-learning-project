@@ -1,0 +1,12 @@
+
+
+# Pods:
+
+
+# Logs:
+
+
+# Namespaces:
+
+    kubectl create namespace {namespace name}
+
