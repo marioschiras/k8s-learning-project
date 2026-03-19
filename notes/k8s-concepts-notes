@@ -86,3 +86,10 @@ HPA:
 Namespaces:
 
     - Way to divide the kubernetes cluster into environemnts so resources are organized
+
+
+Helm: 
+
+    - Helm allows to package kubernetes applications
+
+    - Problem that it solves kubernets has too many files, helm allows everything nice an organized

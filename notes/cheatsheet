@@ -10,3 +10,18 @@
 
     kubectl create namespace {namespace name}
 
+    kubectl scale deployment {deployment name} --replace={number of replicas}
+
+
+
+# Shortcuts
+
+    // This will create a deployment file with the name of the deployment and with the specified image
+    kubectl create deployment {name} --image={image name} --dry-run=client -o yaml > test.yml 
+
+    // 
+    kubectl create configmap {configmap name} --from-literal={Key}={Value}
+
+
+        
+        
